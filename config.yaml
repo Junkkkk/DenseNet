@@ -1,0 +1,62 @@
+# General Configuration
+general:
+  name: DenseNet
+
+# Ingredient Configuration
+ingredient:
+  param:
+
+    #    Arguments:
+    #        input_shape  : shape of the input images. E.g. (28,28,1) for MNIST
+    #        dense_blocks : amount of dense blocks that will be created (default: 3)
+    #        dense_layers : number of layers in each dense block. You can also use a list for numbers of layers [2,4,3]
+    #                       or define only 2 to add 2 layers at all dense blocks. -1 means that dense_layers will be calculated
+    #                       by the given depth (default: -1)
+    #        growth_rate  : number of filters to add per dense block (default: 12)
+    #        nb_classes   : number of classes
+    #        dropout_rate : defines the dropout rate that is accomplished after each conv layer (except the first one).
+    #                       In the paper the authors recommend a dropout of 0.2 (default: None)
+    #        bottleneck   : (True / False) if true it will be added in convolution block (default: False)
+    #        compression  : reduce the number of feature-maps at transition layer. In the paper the authors recomment a compression
+    #                       of 0.5 (default: 1.0 - will have no compression effect)
+    #        weight_decay : weight decay of L2 regularization on weights (default: 1e-4)
+    #        depth        : number or layers (default: 40)
+
+    input_shape : [32,32,3] #image dim
+    dense_blocks : 3
+    dense_layers : [6,6,6]
+    growth_rate : 6
+    nb_classes : 10
+    dropout_rate : 0.3
+    bottleneck : True
+    compression : 1.0
+    weight_decay : 1e-4
+    depth : 40
+
+
+# Data Configuration
+data:
+  path:
+      data_path: /home/junyoung/workspace/CIFAR10/data
+
+# Log and Model Save Configuration
+result:
+  path:
+    log_path: /home2/jypark/CIFAR1000/result/1/log.log
+    save_path: /home2/jypark/CIFAR1000/result/1/model
+    tb_path: /home2/jypark/CIFAR1000/result/tblog
+    archi_path: /home2/jypark/CIFAR1000/result/1/model_architecture
+
+# Training Configuration
+train_param:
+  multi_gpu: 1
+  epochs : 10000
+  batch_size: 64
+  steps_per_epoch: 1000
+  es_tolerance: 10
+  metrics:
+    - Loss
+    - Accuracy
+  key_metric: Loss
+  learning_rate : 0.0005
+  decay : 0.001
